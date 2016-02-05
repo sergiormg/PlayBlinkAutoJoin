@@ -5,8 +5,8 @@
 // @description  Enter random giveaways on Playblink
 // @author       Sérgio Gonçalves
 // @match        *.playblink.com/*
-// @downloadURL	https://raw.githubusercontent.com/goncalvessergio/PlayBlinkAutoJoin/master/PlayBlinkAutoJoin.js
-// @updateURL	https://raw.githubusercontent.com/goncalvessergio/PlayBlinkAutoJoin/master/PlayBlinkAutoJoin.js
+// @downloadURL	https://raw.githubusercontent.com/goncalvessergio/PlayBlinkAutoJoin/master/PlayBlinkAutoJoin.js?token=AKrFlxIyGM7ITKdiCOtEOuGRy3nyERG4ks5WvlfawA%3D%3D
+// @updateURL	https://raw.githubusercontent.com/goncalvessergio/PlayBlinkAutoJoin/master/PlayBlinkAutoJoin.js?token=AKrFlxIyGM7ITKdiCOtEOuGRy3nyERG4ks5WvlfawA%3D%3D
 // @grant        none
 // ==/UserScript==
 /* jshint -W097 */
