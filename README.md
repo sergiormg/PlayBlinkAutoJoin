@@ -1,0 +1,2 @@
+# PlayBlinkAutoJoin
+PlayBlink Auto Join
