@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         Playblink Random Giveaways Autojoin
+// @name         PlayBlink Random Giveaways Autojoin
 // @namespace    www.sg.net
-// @version      0.3.3
-// @description  Enter random giveaways on Playblink
+// @version      0.3.4
+// @description  Enter random giveaways on PlayBlink
 // @author       Sérgio Gonçalves
 // @match        http://*.playblink.com/*
 // @match        http://www.playblink.com/
@@ -15,6 +15,7 @@
 
 /*global $,console,alert */
 
+var version = "0.3.4";
 var output = true; // outputs console messages
 var delay = 5000; // 5 seconds between giveaway
 var myPoints = 0; // Player points
@@ -34,16 +35,13 @@ function print(message) {
 function enterGiveaway(giveawayNumber, callback) {
     'use strict';
     var url = '/?do=blink&game=' + giveawayNumber + '&captcha=1';
-    callback();
-    /*
     $.ajax(url, {
         method: "get",
         success: function (data) {
-            print(data);
+            //print(data);
             callback();
         }
     });
-    */
 }
 
 function updateFloatingDiv() {
@@ -59,6 +57,13 @@ function updateFloatingDiv() {
     plajGiveaways.html(totalGiveaways);
     plajPoints.html(myPoints);
     plajRunning.html(running ? 'Yes' : 'No');
+}
+
+function stopBot(reason) {
+    'use strict';
+    running = false;
+    print("Bot stopped. Reason: " + reason);
+    updateFloatingDiv();
 }
 
 function chooseGiveaway() {
@@ -80,16 +85,13 @@ function chooseGiveaway() {
                     enterGiveaway(giveawayNumber, chooseGiveaway);
                 }, delay);
                 totalGiveaways = totalGiveaways - 1;
+                $(giveaways[index]).hide(); //
                 updateFloatingDiv();
             } else {
-                running = false;
-                print("Not enough points.");
-                print("Bot Stopped");
+                stopBot("Not enough points.");
             }
         } else {
-            running = false;
-            print("No more giveawyas. Done.");
-            print("Bot Stopped");
+            stopBot("No more giveawyas. Done.");
         }
     }
 }
@@ -102,7 +104,7 @@ function addFloatingDiv() {
     plajRunning = $('<span id="plajRunning" />').html(running ? 'Yes' : 'No');
     
     plajStats = $("<div style='position: fixed; display: block; background:white; z-index: 999; padding: 5px;' id='plajStats'/>");
-    plajStats.append('<b>PlayBlink Auto Join</b><br/><br/>');
+    plajStats.append('<b>PlayBlink Auto Join v' + version + '</b><br/><br/>');
     plajStats.append("<b>Points: </b>").append(plajPoints).append("<br/>");
     plajStats.append("<b>Giveaways: </b>").append(plajGiveaways).append("<br/>");
     plajStats.append("<b>Running: </b>").append(plajRunning).append("<br/>");
@@ -122,11 +124,10 @@ function doSomething() {
         if (totalGiveaways > 0) {
             chooseGiveaway();
         } else {
-            running = false;
-            print("Bot Stopped. No giveaways.");
+            stopBot("No giveaways.");
         }
     } else {
-        print("Bot Stopped");
+        stopBot("Bot not running.");
     }
 }
 
